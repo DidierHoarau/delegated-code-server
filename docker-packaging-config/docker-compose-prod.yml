@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    labels:
+      - "discovery.service.name=yoursubdomain.yourdomain.com"
+      - "discovery.service.port=3000"
+      - "discovery.service.https=y"
+    networks:
+      - webproxy-network
+    restart: always
+
+networks:
+  webproxy-network:
+    external: true

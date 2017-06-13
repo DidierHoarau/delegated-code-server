@@ -1,0 +1,3 @@
+[submodule "docker-packaging"]
+	path = docker-packaging
+	url = ../docker-packaging
