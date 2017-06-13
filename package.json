@@ -7,10 +7,11 @@
     "packaging:image-build": "docker-packaging/image-build.sh",
     "packaging:service-deploy": "docker-packaging/service-deploy.sh",
     "packaging:service-run": "docker-packaging/service-run.sh",
-    "test:dev": "npm run lint && NODE_ENV=dev mocha test/tests_dev.js",
-    "test:dev:auto": "npm-watch",
     "lint": "eslint src",
-    "run:dev": "NODE_ENV=dev nodemon --watch src src/app.js"
+    "test:api": "NODE_ENV=dev mocha tests-api/tests.js",
+    "test:all": "npm run lint && npm run test:api",
+    "run:dev": "NODE_ENV=dev nodemon --watch src src/app.js",
+    "watch:test": "npm-watch test:all"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,6 @@
     "npm-watch": "^0.1.8"
   },
   "watch": {
-    "test:dev": "{src,test}/**/*.js"
+    "test:all": "{src,tests-api}/**/*.js"
   }
 }
