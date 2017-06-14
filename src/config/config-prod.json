@@ -1,5 +1,8 @@
 {
   "auth": {
     "secret": "yoursecret"
+  },
+  "folders": {
+    "projectDefinitions": "/opt/data/projects"
   }
 }
