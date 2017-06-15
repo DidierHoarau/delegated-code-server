@@ -36,21 +36,54 @@ projectApi.post('/', (req, res) => {
     });
 });
 
+/**
+ * Get the list of projects
+ */
 projectApi.get('/', (req, res) => {
   logger.info(LOGTAG + 'GET /');
-  res.status(201).json();
+  projectsStorage
+    .list()
+    .then(projects => {
+      logger.info(LOGTAG + 'Project listed: ' + projects.length);
+      res.status(200).json(projects);
+    })
+    .catch(error => {
+      errors.getApiResponse(res, LOGTAG, error);
+    });
 });
 
+/**
+ * Get 1 project
+ */
 projectApi.get('/:projectId', (req, res) => {
   const projectId = req.params.projectId;
   logger.info(LOGTAG + 'GET /' + projectId);
-  res.status(200).json();
+  projectsStorage
+    .get(projectId)
+    .then(project => {
+      logger.info(LOGTAG + 'Project returned');
+      res.status(200).json(project);
+    })
+    .catch(error => {
+      errors.getApiResponse(res, LOGTAG, error);
+    });
 });
 
+/**
+ * Delete 1 project
+ */
 projectApi.delete('/:projectId', (req, res) => {
   const projectId = req.params.projectId;
   logger.info(LOGTAG + 'DELETE /' + projectId);
-  res.status(200).json();
+  projectsStorage
+    .delete(projectId)
+    .then(project => {
+      logger.info(LOGTAG + 'Project deleted: ' + projectId);
+      res.status(200).json(project);
+    })
+    .catch(error => {
+      errors.getApiResponse(res, LOGTAG, error);
+    });
 });
 
 module.exports = projectApi;
